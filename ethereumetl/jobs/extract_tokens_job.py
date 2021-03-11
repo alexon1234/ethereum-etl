@@ -33,10 +33,5 @@ class ExtractTokensJob(ExportTokensJob):
         self.batch_work_executor.execute(self.contracts_iterable, self._export_tokens_from_contracts)
 
     def _export_tokens_from_contracts(self, contracts):
-        tokens = [contract for contract in contracts if contract.get('is_erc20') or contract.get('is_erc721')]
-
-        for token in tokens:
-            self._export_token(token_address=token['address'], block_number=token['block_number'])
-
-
-
+        for contract in contracts:
+            self._export_token(token_address=contract['address'], block_number=contract['block_number'])
